@@ -21,10 +21,10 @@ public class AuthorMapper {
         
     }
 
-
-
     public static AuthorResponseDTO toDTO(Author author) {
-        if (author == null) return null;
+        if (author == null){
+             return null;
+        }
 
         return new AuthorResponseDTO(
                 author.getId(),

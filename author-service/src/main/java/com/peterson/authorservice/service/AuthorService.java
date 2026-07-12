@@ -41,7 +41,7 @@ public class AuthorService {
     @Transactional
     public AuthorResponseDTO findById(UUID id){
         Author author = authorRepository.findById(id).
-        orElseThrow(() -> new RuntimeException("Autor não encontrado!"));
+            orElseThrow(() -> new RuntimeException("Autor não encontrado!"));
 
         return AuthorMapper.toDTO(author);
     }
