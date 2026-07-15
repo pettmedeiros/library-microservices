@@ -3,6 +3,7 @@ package com.peterson.userservice.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -18,14 +19,18 @@ import jakarta.transaction.Transactional;
 public class UserService {
 
     UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
     public UserResponseDTO createUser(UserRequestDTO dto){
         User user = UserMapper.toEntity(dto);
+
+        user.setPassword(passwordEncoder.encode(dto.password()));
 
         User userSaved = userRepository.save(user);
 

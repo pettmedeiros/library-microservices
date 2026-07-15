@@ -9,6 +9,5 @@ public record LoginRequestDTO(
     @NotBlank
     String email,
     String password
-) {
-    
+) {   
 }
