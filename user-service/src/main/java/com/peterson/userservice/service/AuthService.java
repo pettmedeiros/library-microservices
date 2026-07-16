@@ -13,10 +13,12 @@ public class AuthService {
 
     UserRepository userRepository;
     BCryptPasswordEncoder passwordEncoder;
-    
-    public AuthService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    JwtService jwtService;
+
+    public AuthService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public LoginResponseDTO login (LoginRequestDTO dto){
@@ -32,8 +34,11 @@ public class AuthService {
         if(!senhaValida){
             throw new RuntimeException("Senha inválida!");
         }
-           
-        return new LoginResponseDTO("Login realizado!");
+
+           String token = jwtService.generateToken(user.getEmail());
+
+
+        return new LoginResponseDTO(token);
         
     }
 

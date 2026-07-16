@@ -21,24 +21,24 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    UUID id;
+    private UUID id;
 
     @Column(nullable = false, length =  150)
     @NotBlank(message = "Nome obrigatório")
-    String name;
+    private String name;
 
     @Column(nullable = false, length =  150)
     @NotBlank(message = "E-mail obrigatório")
     @Email(message = "E-mail inválido")
-    String email;
+    private String email;
 
     @Column(nullable = false)
     @NotBlank(message = "Senha obrigatória")
-    String password;
+    private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    Role role;
+    private Role role;
 
     public User() {
     }
